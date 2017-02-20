@@ -1,0 +1,11 @@
+{
+  "name": "food_nutrition_server",
+  "version": "1.0.0",
+  "description": "Simple server for food nutrition app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daniel Kafer",
+  "license": "ISC"
+}
