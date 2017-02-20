@@ -24,3 +24,5 @@ app.get('/random', (req, res) => {
 		return err;
 	});
 })
+
+app.listen(process.env.PORT || 8080)
