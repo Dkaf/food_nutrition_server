@@ -9,6 +9,8 @@
   "author": "Daniel Kafer",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.1"
+    "es6-promise": "^4.0.5",
+    "express": "^4.14.1",
+    "isomorphic-fetch": "^2.2.1"
   }
 }

@@ -1,5 +1,5 @@
 const express = require('express');
-const fetch = require('fetch');
+const fetch = require('isomorphic-fetch');
 const app = express();
 const cors = require('cors')
 
