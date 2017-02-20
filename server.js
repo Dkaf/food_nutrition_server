@@ -8,8 +8,9 @@ app.use(cors());
 
 // Random Recipe
 app.get('/random', (req, res) => {
+	let key = process.env.MASHAPE_KEY
 	const request = new Request('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random', {
-		'X-Mashape-Key': process.env.MASHAPE_KEY,
+		'X-Mashape-Key': key,
 		'Content-Type': 'Application/json',
 		'Accept': 'Application/json'
 	});
