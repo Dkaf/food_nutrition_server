@@ -1,14 +1,15 @@
 const express = require('express');
 const fetch = require('isomorphic-fetch');
 const app = express();
-const cors = require('cors')
-const key = process.env.MASHAPE_KEY
+const cors = require('cors');
+const key = process.env.MASHAPE_KEY;
 
 app.use(cors());
 
 
 // Random Recipe
 app.get('/random', (req, res) => {
+	console.log(key);
 	const request = new Request('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random', {
 		'X-Mashape-Key': key,
 		'Content-Type': 'Application/json',
