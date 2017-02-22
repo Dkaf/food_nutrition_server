@@ -17,9 +17,9 @@ app.get('/random', (req, res) => {
 		unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random')
 		.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 		.end( (data) => {
-			resultArr.push(data);
+			resultArr.push(data)
+			return res.json(resultArr);
 		})
-		return res.json(resultArr);
 	})
 })
 
@@ -31,6 +31,20 @@ app.get('/recipe/:id', (req, res) => {
 	.end( (results) => {
 		return res.json(resultArr);
 	})
+
+app.get('/recipesearch/:query', (req, res) => {
+	let query = req.params.query;
+	unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/autocomplete?query=" + query)
+	.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
+	.end( (results) => {
+		unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + results.id + '/similar')
+		.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
+		.end( (data) => {
+			return res.json(data);
+		})
+	})
+})
+
 
 
 app.listen(process.env.PORT || 8080)
