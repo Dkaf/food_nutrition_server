@@ -18,7 +18,7 @@ app.get('/random', (req, res) => {
 		.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 		.end( (data) => {
 			resultArr.push(data);
-		});
+		})
 		return res.json(resultArr);
 	})
 })
