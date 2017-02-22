@@ -13,27 +13,24 @@ app.get('/random', (req, res) => {
 	unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random')
 	.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 	.end( (results) => {
-		return res.json(results);
+		let resultArr = [results]
+		unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random')
+		.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
+		.end( (data) => {
+			resultArr.push(data);
+		});
+		return res.json(resultArr);
 	})
 })
 
 // Recipe Details
 app.get('/recipe/:id', (req, res) => {
 	let id = req.params.id;
-	const request = new Request('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + id + '/information', {
-		'X-Mashape-Key': key,
-		'Accept': 'Application/json'
-	});
-	fetch(request)
-	.then( (response) => {
-		return response.json();
+	unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/')
+	.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
+	.end( (results) => {
+		return res.json(resultArr);
 	})
-	.then( (data) => {
-		return res.json(data);
-	})
-	.catch( (err) => {
-		return res.json(err);
-	});
-})
+
 
 app.listen(process.env.PORT || 8080)
