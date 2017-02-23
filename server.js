@@ -31,6 +31,7 @@ app.get('/recipe/:id', (req, res) => {
 	.end( (results) => {
 		return res.json(resultArr);
 	})
+})
 
 app.get('/recipesearch/:query', (req, res) => {
 	let query = req.params.query;
