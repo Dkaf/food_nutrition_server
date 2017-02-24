@@ -13,11 +13,11 @@ app.get('/random', (req, res) => {
 	unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random')
 	.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 	.end( (results) => {
-		let resultArr = [results]
+		let resultArr = [results.recipes]
 		unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random')
 		.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 		.end( (data) => {
-			resultArr.push(data)
+			resultArr.push(data.recipes)
 			return res.json(resultArr);
 		})
 	})
