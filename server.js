@@ -19,9 +19,9 @@ app.get('/random', (req, res) => {
 		.end( (data) => {
 			resultArr.push(data.body.recipes)
 			resultArr.forEach( (i) => {
-				unirest.get('https://hidden-stream-82621.herokuapp.com/recipe/' + i.id)
+				unirest.get('https://hidden-stream-82621.herokuapp.com/recipe/' + resultArr[i].id)
 				.end( (data) => {
-					i.push(data);
+					resultArr[i].push(data);
 				});
 			});
 			return res.json(resultArr);
