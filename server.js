@@ -18,10 +18,16 @@ app.get('/random', (req, res) => {
 		.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 		.end( (data) => {
 			resultArr.push(data.body.recipes)
+			resultArr.forEach( (i) => {
+				unirest.get('https://hidden-stream-82621.herokuapp.com/recipesearch/')
+				.end( (data) => {
+					i.push(data);
+				});
+			});
 			return res.json(resultArr);
-		})
-	})
-})
+		});
+	});
+});
 
 // Recipe Details
 app.get('/recipe/:id', (req, res) => {
