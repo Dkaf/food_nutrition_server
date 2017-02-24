@@ -41,7 +41,7 @@ app.get('/recipesearch/:query', (req, res) => {
 	.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 	.end( (results) => {
 		let originalSearch = res.json(results.body.map( (i) => { return i.id }));
-		unirest.get('https://hidden-stream-82621.herokuapp.com/similarRecipes/' + originalSearch);
+		unirest.get('https://hidden-stream-82621.herokuapp.com/similarRecipes/' + originalSearch)
 		.end( (data) => {
 			return res.json(results);
 		})
