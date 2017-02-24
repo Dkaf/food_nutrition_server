@@ -30,8 +30,8 @@ app.get('/recipe/:id', (req, res) => {
 	.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 	.end( (results) => {
 		return res.json(resultArr);
-	})
-})
+	});
+});
 
 
 // Recipe Autocomplete Search
@@ -40,14 +40,19 @@ app.get('/recipesearch/:query', (req, res) => {
 	unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/autocomplete?number=1&query=" + query)
 	.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 	.end( (results) => {
-		results = res.json(results);
-		console.log(results);
-		unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + results.id + '/similar')
-		.end( (data) => {
-			return res.json(data);
-		})
-	})
-})
+		return res.json(results);
+	});
+});
+
+// Similar recipes
+app.get('/similarRecipes/:id', (req, res) => {
+	let id = req.params.id;
+	unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + id + '/similar')
+	.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
+	.end( (results) => {
+		return res.json(results);
+	});
+});
 
 
 
