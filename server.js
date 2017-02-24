@@ -40,6 +40,7 @@ app.get('/recipesearch/:query', (req, res) => {
 	unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/autocomplete?number=1&query=" + query)
 	.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 	.end( (results) => {
+		results = results.json();
 		console.log(results);
 		unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + results.id + '/similar')
 		.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
