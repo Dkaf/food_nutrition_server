@@ -43,7 +43,6 @@ app.get('/recipesearch/:query', (req, res) => {
 		results = res.json(results);
 		console.log(results);
 		unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + results.id + '/similar')
-		.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 		.end( (data) => {
 			return res.json(data);
 		})
