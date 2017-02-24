@@ -26,10 +26,10 @@ app.get('/random', (req, res) => {
 // Recipe Details
 app.get('/recipe/:id', (req, res) => {
 	let id = req.params.id;
-	unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/')
+	unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + id + '/information?includeNutrition=true')
 	.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 	.end( (results) => {
-		return res.json(resultArr);
+		return res.json(results.nutrition);
 	});
 });
 
