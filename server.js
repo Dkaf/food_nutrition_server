@@ -40,7 +40,7 @@ app.get('/recipesearch/:query', (req, res) => {
 	unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/autocomplete?number=1&query=" + query)
 	.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 	.end( (results) => {
-		let originalSearch = res.json(results.body.map( (i) => { return i.id }));
+		let originalSearch = res.json(results.body[0].id
 		unirest.get('https://hidden-stream-82621.herokuapp.com/similarRecipes/' + originalSearch)
 		.end( (data) => {
 			return res.json(results);
