@@ -13,18 +13,18 @@ app.get('/random', (req, res) => {
 	unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random')
 	.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 	.end( (results) => {
-		let resultArr = [results.body.recipes]
+		let resultArr = [results.body.recipes[0]]
 		unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random')
 		.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 		.end( (data) => {
-			resultArr.push(data.body.recipes)
+			resultArr.push(data.body.recipes[0])
 			let p = [];
 			resultArr.forEach( (i) => {
 				p.push(new Promise( (resolve, reject) => {
-					unirest.get('https://hidden-stream-82621.herokuapp.com/recipe/' + i[0].id)
+					unirest.get('https://hidden-stream-82621.herokuapp.com/recipe/' + i.id)
 					.end( (data) => {
 						console.log(data);
-						i.concat(data);
+						i.recipeNutrition = data;
 						resolve(data);
 					});
 				}));
