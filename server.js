@@ -18,13 +18,19 @@ app.get('/random', (req, res) => {
 		.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 		.end( (data) => {
 			resultArr.push(data.body.recipes)
+			let p = [];
 			resultArr.forEach( (i) => {
-				unirest.get('https://hidden-stream-82621.herokuapp.com/recipe/' + i[0].id)
-				.end( (data) => {
-					i.concat(data);
-				});
+				p.push(new Promise( (resolve, reject) => {
+					unirest.get('https://hidden-stream-82621.herokuapp.com/recipe/' + i[0].id)
+					.end( (data) => {
+						i.concat(data);
+						resolve(data);
+					});
+				}));
 			});
-			return res.json(resultArr);
+			Promise.all(p).then( () => {			
+				return res.json(resultArr);
+			})
 		});
 	});
 });
