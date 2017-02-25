@@ -67,7 +67,7 @@ app.get('/similarRecipes/:id', (req, res) => {
 	unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + id + '/similar')
 	.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 	.end( (results) => {
-		return res.json(results.body.body);
+		return res.json(results.body);
 	});
 });
 
