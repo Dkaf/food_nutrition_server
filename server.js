@@ -23,12 +23,13 @@ app.get('/random', (req, res) => {
 				p.push(new Promise( (resolve, reject) => {
 					unirest.get('https://hidden-stream-82621.herokuapp.com/recipe/' + i[0].id)
 					.end( (data) => {
+						console.log(data);
 						i.concat(data);
 						resolve(data);
 					});
 				}));
 			});
-			Promise.all(p).then( () => {			
+			Promise.all(p).then( () => {
 				return res.json(resultArr);
 			})
 		});
