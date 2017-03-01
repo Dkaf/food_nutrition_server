@@ -67,6 +67,16 @@ app.get('/similarRecipes/:id', (req, res) => {
 	unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + id + '/similar')
 	.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 	.end( (results) => {
+		let p = [];
+		results.forEach( (i)=> {
+			p.push(new Promise( (resolve, reject) => {
+				unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + i.id + '/information?includeNutrition=true')
+				.end( (data) =>{
+					i.nutrition = data.nutrition;
+					resolve(data);
+				});
+			});
+		}));
 		return res.json(results.body);
 	});
 });
