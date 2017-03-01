@@ -76,8 +76,10 @@ app.get('/similarRecipes/:id', (req, res) => {
 					resolve(data);
 				});
 			});
-		}));
-		return res.json(results.body);
+		)});
+		Promise.all(p).then( () => {
+			return res.json(results.body);
+		})
 	});
 });
 
