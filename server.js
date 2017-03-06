@@ -63,7 +63,7 @@ app.get('/similarRecipes/:id', (req, res) => {
 	.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 	.end( (results) => {
 		let p = [];
-		results.forEach( (i)=> {
+		results.body.forEach( (i)=> {
 			p.push(new Promise( (resolve, reject) => {
 				unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + i.id + '/information?includeNutrition=true')
 				.end( (data) =>{
