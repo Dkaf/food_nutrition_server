@@ -23,7 +23,6 @@ app.get('/random', (req, res) => {
 				p.push(new Promise( (resolve, reject) => {
 					unirest.get('https://hidden-stream-82621.herokuapp.com/recipe/' + i.id)
 					.end( (data) => {
-						console.log(data);
 						i.recipeNutrition = data;
 						resolve(data);
 					});
@@ -50,14 +49,10 @@ app.get('/recipe/:id', (req, res) => {
 // Recipe Autocomplete Search
 app.get('/recipesearch/:query', (req, res) => {
 	let query = req.params.query;
-	unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/autocomplete?number=1&query=" + query)
+	unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/autocomplete?number=5&query=" + query)
 	.headers({'X-Mashape-Key': key, 'Accept': 'Application/json', 'Content-Type': 'Application/json'})
 	.end( (results) => {
-		let originalSearch = results.body[0].id;
-		unirest.get('https://hidden-stream-82621.herokuapp.com/similarRecipes/' + originalSearch)
-		.end( (data) => {
-			return res.json(data);
-		})
+		return(res.json(results));
 	});
 });
 
@@ -82,6 +77,7 @@ app.get('/similarRecipes/:id', (req, res) => {
 		});
 	});
 });
+
 
 
 
