@@ -24,7 +24,7 @@ app.get('/random', (req, res) => {
 					unirest.get('https://hidden-stream-82621.herokuapp.com/recipe/' + i.id)
 					.end( (data) => {
 						console.log(data);
-						i.recipeNutrition = data.nutrition.nutrients;
+						i.recipeNutrition = data.body.nutrition.nutrients;
 						resolve(data);
 					});
 				}));
