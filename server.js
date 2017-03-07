@@ -66,10 +66,11 @@ app.get('/similarRecipes/:id', (req, res) => {
 		let p = [];
 		results.body.forEach( (i)=> {
 			p.push(new Promise( (resolve, reject) => {
-				unirest.get('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + i.id + '/information?includeNutrition=true')
+				unirest.get('https://hidden-stream-82621.herokuapp.com/recipe/' + i.id)
 				.end( (data) =>{
-					i.nutrition = data.nutrition;
-					i.healthScore = data.healthScore;
+					console.log(data);
+					i.nutrition = data.body.nutrition.nutrients;
+					i.healthScore = data.body.healthScore;
 					resolve(data);
 				});
 			}));
