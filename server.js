@@ -71,6 +71,9 @@ app.get('/similarRecipes/:id', (req, res) => {
 					console.log(data);
 					i.nutrition = data.body.nutrition.nutrients;
 					i.healthScore = data.body.healthScore;
+					i.imgUrl = data.body.image;
+					i.source = data.body.sourceName;
+					i.sourceUrl = data.body.sourceUrl;
 					resolve(data);
 				});
 			}));
